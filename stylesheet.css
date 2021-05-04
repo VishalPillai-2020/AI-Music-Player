@@ -1,0 +1,37 @@
+body {
+    background-size: 700px;
+}
+
+h3 {
+    font-family: metal lord;
+    color: white;
+    font-size: 30px;
+}
+
+h1 {
+
+    font-family: metal lord;
+    color: white;
+    font-size: 35px;
+}
+
+#p_1{
+    color:white !important;
+    font-family:sf pro display;
+    float:right;
+    font-size:11px;
+}
+#p_1 img{
+    width:20px;
+    margin-top:5px;
+    
+}
+
+.piano{
+    color:black
+}
+#song_name{
+    font-family: metal lord;
+    color:white;
+    font-size:22px;
+}
