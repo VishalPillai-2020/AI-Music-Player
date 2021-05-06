@@ -33,5 +33,30 @@ h1 {
 #song_name{
     font-family: metal lord;
     color:white;
-    font-size:22px;
+    font-size:22px ;
+}
+.btn_1{
+    background-color:rgba(78, 73, 73, 0.644) ;
+    border-radius:10px;
+    padding:10px;
+    color:white;
+    border:none;
+    font-family:metal lord;
+    font-size:20px;
+    margin-left:-1000px;
+}
+.btn_2{
+    background-color:rgba(78, 73, 73, 0.644) ;
+    border-radius:10px;
+    padding:10px;
+    color:white;
+    border:none;
+    font-family:metal lord;
+    font-size:20px;
+    margin-right:-1000px;
+}
+canvas{
+    border:5px inset white;
+    margin-top:250px;
+
 }
