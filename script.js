@@ -38,6 +38,7 @@ function modelLoaded() {
 
 function gotPoses(results) {
     if (results.length > 0) {
+        console.log(results);
         rightwristx = results[0].pose.rightWrist.x;
         rightwristy = results[0].pose.rightWrist.y;
         leftwristx = results[0].pose.leftWrist.x;
