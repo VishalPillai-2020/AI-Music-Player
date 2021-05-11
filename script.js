@@ -1,38 +1,67 @@
-song_1="";
-song_2="";
-song_name_element=document.getElementById("song_name");
-function preload(){
-    song_1=loadSound("DarkSide.mp3");
-    song_2=loadSound("Sorry.mp3")
+song_1 = "";
+song_2 = "";
+rightwristx = "";
+rightwristy = "";
+leftwristx = "";
+leftwristy = "";
+song_name_element = document.getElementById("song_name");
+
+function preload() {
+    song_1 = loadSound("DarkSide.mp3");
+    song_2 = loadSound("Sorry.mp3")
 }
-function showhelp(){
-    
-    p_1 =  document.getElementById("p_1");
-    p_1.innerHTML="<span>To play the song Sorry get your left wrist <br>in front of the webcam and to play the song<br> Darkside get your right wrist in front of the webcam </span>";
+
+function showhelp() {
+
+    p_1 = document.getElementById("p_1");
+    p_1.innerHTML = "<span>To play the song Sorry get your left wrist <br>in front of the webcam and to play the song<br> Darkside get your right wrist in front of the webcam </span>";
 }
-function disablehelp(){
-    p_1.innerHTML="Help";
+
+function disablehelp() {
+    p_1.innerHTML = "Help";
 }
-function setup(){
-    video=createCapture(VIDEO);
+
+function setup() {
+    video = createCapture(VIDEO);
     video.hide();
-    canvas=createCanvas(500,350);
+    canvas = createCanvas(500, 350);
     canvas.center();
+    posenet = ml5.poseNet(video, modelLoaded);
+    posenet.on('pose', gotPoses);
+
 }
-function draw(){
-     image(video,0,0,500,400)
+
+function modelLoaded() {
+    console.log("PoseNet Model Is Initialized");
+
 }
-function play_1(){
-    song_name_element.innerHTML="The Current Playing Song Is";
+
+function gotPoses(results) {
+    if (results.length > 0) {
+        rightwristx = results[0].pose.rightWrist.x;
+        rightwristy = results[0].pose.rightWrist.y;
+        leftwristx = results[0].pose.leftWrist.x;
+        leftwristy= results[0].pose.leftWrist.y;
+        console.log("Right Wrist X = "+rightwristx+" Right Wrist Y = "+rightwristy+" Left Wrist X = "+leftwristx+" Left Wrist Y = "+leftwristy);
+    }
+}
+
+function draw() {
+    image(video, 0, 0, 500, 400)
+}
+
+function play_1() {
+    song_name_element.innerHTML = "The Current Playing Song Is";
     song_2.stop();
     song_1.stop();
-song_2.play();
-song_name_element.innerHTML+=" Sorry";
+    song_2.play();
+    song_name_element.innerHTML += " Sorry";
 }
-function play(){
-    song_name_element.innerHTML="The Current Playing Song Is";
+
+function play() {
+    song_name_element.innerHTML = "The Current Playing Song Is";
     song_1.stop();
     song_2.stop();
     song_1.play();
-    song_name_element.innerHTML+=" DarkSide";
-    }
+    song_name_element.innerHTML += " DarkSide";
+}
