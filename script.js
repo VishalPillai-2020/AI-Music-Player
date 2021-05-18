@@ -8,13 +8,13 @@ score_leftWrist = "";
 score_rightWrist = "";
 song_name_element = document.getElementById("song_name");
 var SpeechRecognition = window.webkitSpeechRecognition;
-
 var recognition = new SpeechRecognition();
 recognition.continuous = true;
+recognition.lang = 'en-US';
 recognition.interimResults = true;
 function preload() {
     song_1 = loadSound("DarkSide.mp3");
-    song_2 = loadSound("Sorry.mp3")
+    song_2 = loadSound("Sorry.mp3");
 }
 
 function showhelp() {
@@ -28,6 +28,7 @@ function disablehelp() {
 }
 
 function setup() {
+    start()
     video = createCapture(VIDEO);
     video.hide();
     canvas = createCanvas(500, 350);
@@ -63,14 +64,14 @@ function draw() {
         song_1.stop();
         song_2.play();
         song_name_element.innerHTML = "The Current Playing Song Is 'Sorry'";
-        start()
+
 
     } 
     else if (score_rightWrist > 0.2 && !song_1.isPlaying()) {
         song_2.stop();
         song_1.play();
         song_name_element.innerHTML = "The Current Playing Song Is 'DarkSide'";
-        start()
+    
     }
 }
 
@@ -80,7 +81,6 @@ function play_1() {
     song_1.stop();
     song_2.play();
     song_name_element.innerHTML += " 'Sorry'";
-    start()
 }
 
 function play() {
@@ -89,7 +89,6 @@ function play() {
     song_2.stop();
     song_1.play();
     song_name_element.innerHTML += " 'DarkSide'";
-    start()
 }
 
 
@@ -104,7 +103,7 @@ recognition.onresult = function run(event) {
 
     console.log(Content);
     if (Content == "Stop" || Content == "stop the song") {
-        speak()
+        stopthesongs ()
     }
 
 }
@@ -114,14 +113,3 @@ function stopthesongs (){
 }
 
 
-function speak() {
-    synth = window.speechSynthesis;
-
-    speech = "Stopping the song";
-
-    utterThis = new SpeechSynthesisUtterance(speech);
-    synth.speak(utterThis);
-    setTimeout(function () {
-        stopthesongs ()
-         },5000);
-        }
