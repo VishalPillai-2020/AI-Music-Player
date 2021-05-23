@@ -40,6 +40,7 @@ function setup() {
 
 function modelLoaded() {
     console.log("PoseNet Model Is Initialized");
+    start();
 
 }
 
