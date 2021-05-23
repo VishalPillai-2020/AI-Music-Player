@@ -10,11 +10,14 @@ song_name_element = document.getElementById("song_name");
 var SpeechRecognition = window.webkitSpeechRecognition;
 var recognition = new SpeechRecognition();
 recognition.continuous = true;
-recognition.lang = 'en-US';
 recognition.interimResults = true;
+
+
+
 function preload() {
     song_1 = loadSound("DarkSide.mp3");
     song_2 = loadSound("Sorry.mp3");
+
 }
 
 function showhelp() {
@@ -28,13 +31,13 @@ function disablehelp() {
 }
 
 function setup() {
-    start()
     video = createCapture(VIDEO);
     video.hide();
     canvas = createCanvas(500, 350);
     canvas.center();
     posenet = ml5.poseNet(video, modelLoaded);
     posenet.on('pose', gotPoses);
+
 
 }
 
@@ -46,15 +49,15 @@ function modelLoaded() {
 
 function gotPoses(results) {
     if (results.length > 0) {
-        console.log(results);
+        //console.log(results);
         rightwristx = results[0].pose.rightWrist.x;
         rightwristy = results[0].pose.rightWrist.y;
         leftwristx = results[0].pose.leftWrist.x;
         leftwristy = results[0].pose.leftWrist.y;
         score_leftWrist = results[0].pose.keypoints[9].score;
         score_rightWrist = results[0].pose.keypoints[10].score;
-        console.log("Score of Left Wrist = " + score_leftWrist + " Score of right wrist = " + score_rightWrist);
-        console.log("Right Wrist X = " + rightwristx + " Right Wrist Y = " + rightwristy + " Left Wrist X = " + leftwristx + " Left Wrist Y = " + leftwristy);
+         //console.log("Score of Left Wrist = " + score_leftWrist + " Score of right wrist = " + score_rightWrist);
+        //console.log("Right Wrist X = " + rightwristx + " Right Wrist Y = " + rightwristy + " Left Wrist X = " + leftwristx + " Left Wrist Y = " + leftwristy);
 
     }
 }
@@ -94,16 +97,19 @@ function play() {
 
 
 function start() {
+  
     recognition.start();
-
 }
+recognition.addEventListener('end', () => {
+    recognition.start();
+ });
 recognition.onresult = function run(event) {
     console.log(event);
 
     var Content = event.results[0][0].transcript;
 
     console.log(Content);
-    if (Content == "Stop" || Content == "stop the song") {
+    if (Content == "stop" || Content == "stop the song") {
         stopthesongs ()
     }
 
