@@ -110,7 +110,7 @@ recognition.onresult = function run(event) {
 
     console.log(Content);
     if (Content == "stop" || Content == "stop the song") {
-        stopthesongs ()
+        stopthesongs ();
     }
 
 }
