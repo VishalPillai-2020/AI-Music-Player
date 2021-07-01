@@ -2,9 +2,8 @@ body {
     background-size: 700px;
 }
 @font-face {
-			font-family: ' metal lord';
-
-			src: url(metal_lord.woff);
+ font-family: ' metal lord';
+ src: url(metal_lord.woff);
 		}
 
 h3 {
